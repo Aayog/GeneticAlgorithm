@@ -91,6 +91,7 @@ class Individual:
         return f'{self.chromosome} : {self.fitness:.0f}%'
 
 if __name__ == "__main__":
+    sys.stdout.write(f"Target: {TARGET}\n")
     pop = Population()
     pop.initializePopulation()
     ct = 0
@@ -98,7 +99,7 @@ if __name__ == "__main__":
         for p in pop.population:
             p.calculateFitness()
         pop.selection()
-        sys.stdout.write(f"\r{pop.population[0]}")
+        sys.stdout.write(f"\rResult: {pop.population[0]}")
         if ct > 1000000:
             break
         ct += 1
