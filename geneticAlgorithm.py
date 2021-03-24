@@ -1,31 +1,41 @@
 from random import choice, random
 import sys
 
+# The string with all the possible characters
 GENES = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ,'()!{}-+"
+# Default target string
 TARGET = "to be or not to be that is the question"
+# Population size, if size is large --> overfitting
 POPULATION_SIZE = 10
 
+# if command line arguments provided use the string as target
 if (len(sys.argv) > 1):
     TARGET = sys.argv[1]
     
 class Population:
     def __init__(self):
         self.population = []
-        self.total_population = 0
         self.isDone = False
     
     def initializePopulation(self):
+        '''
+            Initialize the population with random individuals with random chromosomes
+        '''
         self.population = [Individual(Individual.getRandomChromosome()) for _ in range(POPULATION_SIZE)]
-        self.total_population = len(self.population)
 
     def selection(self):
+        '''
+            The idea of selection phase is to select the fittest individuals and let them pass their genes to the next generation.
+            Two pairs of individuals (parents) are selected based on their fitness scores. 
+            Individuals with high fitness have more chance to be selected for reproduction. 
+        '''
         self.population = sorted(self.population, key=lambda x:x.fitness, reverse=True)
-        nextGeneration = self.population[: int(0.1 * self.total_population)] 
+        nextGeneration = self.population[: int(0.1 * POPULATION_SIZE)] 
         if nextGeneration[0].fitness >= 100:
             self.isDone = True
             return
         children = []
-        for _ in range(int(0.9 * self.total_population)):
+        for _ in range(int(0.9 * POPULATION_SIZE)):
             parent1 = choice(nextGeneration)
             parent2 = choice(nextGeneration)
             children.append(Individual(parent1.mate(parent2)))
@@ -58,6 +68,15 @@ class Individual:
         self.fitness = fit / len(self.chromosome) * 100
 
     def mate(self, partner):
+        '''
+            Crossover is the most significant phase in a genetic algorithm. 
+            For each pair of parents to be mated, a crossover point is chosen at random from within the genes.
+            Offspring are created by exchanging the genes of parents among themselves until the crossover point is reached.
+            
+            Mutation
+            In certain new offspring formed, some of their genes can be subjected to a mutation with a low random probability. 
+            This implies that some of the bits in the bit string can be flipped.
+        '''
         child_chromosome = []
         for XX, XY in zip(self.chromosome, partner.chromosome):
             probability = random()
