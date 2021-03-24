@@ -2,11 +2,11 @@ from random import choice, random
 import sys
 
 # The string with all the possible characters
-GENES = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ,'()!{}-+"
+GENES = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ,'()!{}-+.\\\""
 # Default target string
 TARGET = "to be or not to be that is the question"
 # Population size, if size is large --> overfitting
-POPULATION_SIZE = 10
+POPULATION_SIZE = 1000
 
 # if command line arguments provided use the string as target
 if (len(sys.argv) > 1):
