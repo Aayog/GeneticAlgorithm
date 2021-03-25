@@ -8,6 +8,7 @@ TARGET = "to be or not to be that is the question"
 # Population size, if size is large --> overfitting
 POPULATION_SIZE = 1000
 
+THRESHOLD = 98
 # if command line arguments provided use the string as target
 if (len(sys.argv) > 1):
     TARGET = sys.argv[1]
@@ -31,7 +32,7 @@ class Population:
         '''
         self.population = sorted(self.population, key=lambda x:x.fitness, reverse=True)
         nextGeneration = self.population[: int(0.1 * POPULATION_SIZE)] 
-        if nextGeneration[0].fitness >= 100:
+        if nextGeneration[0].fitness >= THRESHOLD:
             self.isDone = True
             return
         children = []
