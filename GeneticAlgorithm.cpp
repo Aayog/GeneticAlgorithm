@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
         pop.calculateAllFitness();
         pop.selection();
         // pop.print();
-        std::cout << "\rResult: " << pop.getFittest() << std::flush;;
+        std::cout << "\rResult: " << pop.getFittest() <<"%"<< std::flush;;
         if (++count > MAX) {
             break;
         }
