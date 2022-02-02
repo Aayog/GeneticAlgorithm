@@ -1,0 +1,1 @@
+cd ./genetic_algorithm; cargo run
