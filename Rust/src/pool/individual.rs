@@ -8,6 +8,7 @@ pub struct Individual {
 }
 
 impl Individual {
+    // A constructor for the Individual that takes in a new chromosome string
     pub fn new(_chromosome: String) -> Individual {
         let target = String::from("to be or not to be");
 
@@ -17,6 +18,7 @@ impl Individual {
             target: target
         }
     }
+    // for the current generation gets the fitness for current instance of one individual
     pub fn calculate_fitness(&mut self) {
         let mut fit = 0.0;
         let chrmsm = &self.chromosome;
@@ -31,7 +33,7 @@ impl Individual {
         }
         self.fitness = (fit / self.chromosome.len() as f32) * 100.0;
     }
-
+    // represents the mating of the current Individual with a partner and returns the String
     pub fn mate(&mut self, partner: &Individual) -> String {
         let xx = self.chromosome.to_string();
         let xy = partner.chromosome.to_string();
@@ -52,7 +54,7 @@ impl Individual {
         }
         return_string
     }
-
+    // this gets the starting chromosome for the individual, with all random gene
     pub fn random_chromosome(target: String) -> Individual{
         let mut s = String::new();
         for _ in 0..target.len() {
@@ -64,7 +66,7 @@ impl Individual {
             fitness: 0.0
         }
     }
-    
+    // getting a single random gene
     pub fn random_gene() -> String{
         let mut rng = rand::thread_rng();
         let genes = String::from("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ,'()!{}-+.*!");
@@ -75,8 +77,8 @@ impl Individual {
         }
     }
 }
-//struct Generate<Individual> (fn() -> Individual);
 
+// cloning the current Individual
 impl Clone for Individual {
     fn clone(&self) -> Self {
         let chromosome = self.chromosome.clone();

@@ -10,11 +10,13 @@ class Population {
         std::vector<Individual> population;
         bool isDone;
     public:
+        Population(int size, std::string gene, std::string target);
         void initializePopulation(int size, std::string gene, std::string target);
         void selection();
         static inline int populationSize = 0;
         bool reachedTarget();
         void calculateAllFitness();
         std::string getFittest();
+        int getFittness();
 };
 #endif

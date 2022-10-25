@@ -3,6 +3,10 @@
 #include <algorithm>
 #include <sstream>
 
+Population::Population(int size, std::string gene, std::string target) {
+    initializePopulation(size, gene, target);
+}
+
 void Population::initializePopulation(int size, std::string gene, std::string target) {
     Population::populationSize = size;
     if (Individual::gene == ""){
@@ -54,4 +58,8 @@ std::string Population::getFittest() {
     ss << this->population[0].chromosome;
     ss <<  " : " <<(int)this->population[0].fitness;
     return ss.str();
+}
+
+int Population::getFittness() {
+    return (int)this->population[0].fitness;
 }
