@@ -28,15 +28,22 @@ int main(int argc, char *argv[]) {
     std::cout << "Target: " << target << std::endl;
     // Random seed
     srand (time(NULL));
+    
+    // Initialized the first generation population
     Population pop(POPULATION_SIZE, genes, target);
     unsigned long count = 0;
     int len = target.size();
+    // For every generation until the target is reached
     while (!pop.reachedTarget()) {
+        // Get the fitness for all individuals
         pop.calculateAllFitness();
+        // Perform the selection process
         pop.selection();
+        // Style issues while printing
         if (len <= 120){
             std::cout << "\r";
         }
+        // Display the results at the same line
         std::cout << "Result: " << pop.getFittest() <<"%"<< std::flush;;
         if (++count > MAX || pop.getFittness() > 99) {
             break;
